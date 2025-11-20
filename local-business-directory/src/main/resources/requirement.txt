@@ -1,0 +1,46 @@
+Client Brief: Local Directory Service
+Project Goal
+"We want to launch a simple, online directory for local businesses in our city. Our users—the local community—need a reliable way to find information about the shops, restaurants, and services nearby. The goal is to digitize and centralize local business information."
+
+Core User Stories (What the System Must Do)
+Business Registration: "As a staff member, I need to be able to add a new business to the directory by providing its name, category, and full street address."
+
+Information Lookup: "As a user, I need to be able to retrieve all the details for a specific business, like their phone number, website, and operating hours."
+
+Data Maintenance: "As a staff member, I need to be able to update any information for an existing business if, for example, they move locations or change their phone number."
+
+Data Removal: "As a staff member, I need to be able to remove a business from the directory if it permanently closes down."
+
+Key Business Rule
+Location is Crucial: "For any business we add, we must somehow store its precise geographical location (its latitude and longitude). This is essential for a future phase where we want to implement search by distance."
+
+🧠 Your Role as the Backend Engineer
+Now, your challenge is to translate this vague client brief into a robust API design. This requires you to ask and answer the following questions (which should guide your implementation):
+
+1. Data Contract & Validation (Asking the Client)
+What data is absolutely required? (Based on the brief, name, category, and address seem mandatory).
+
+What are the limits? (e.g., How long can the name be? Are there specific categories or is it free-form text?)
+
+How should the coordinates be obtained? (The client mentioned storing precise geographical location, but they haven't mentioned how. You must decide on the Geocoding service integration.)
+
+2. API Design & Security (Internal Decision)
+Who can perform these actions? The client used "staff member" for CRUD operations and "user" for reading.
+
+Decision: You need an authentication/authorization mechanism for staff (though for this easy project, you can simulate it with a simple API Key header, or acknowledge that true security like JWT will be added later).
+
+Decision: Read operations (GET) should be public and require no authentication.
+
+What is the API style? (You decide on RESTful API design, consistent URI paths, and standard HTTP methods.)
+
+3. Error Handling & Correctness (Internal Decision)
+What happens if the required data is missing? (You decide to implement JSR 380 Validation and return a 400 Bad Request).
+
+What happens if a business ID doesn't exist? (You decide to throw a custom exception and return a 404 Not Found).
+
+4. Architecture & Design Principles (Internal Decision)
+How do you ensure the system is maintainable? (You decide to use a strict Layered Architecture—Controller, Service, Repository—to separate concerns.)
+
+How do you make the Geocoding service swappable? (You decide to implement the Open-Closed Principle by using a GeocodingService interface.)
+
+This client brief gives you the "What" (the business need), and it is up to you to determine the "How" (the technical design, data structure, and error handling).
