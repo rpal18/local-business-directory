@@ -1,4 +1,4 @@
-package com.rohitPal.local._business_directory;
+package com.rohitPal.localBusinessDirectory;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

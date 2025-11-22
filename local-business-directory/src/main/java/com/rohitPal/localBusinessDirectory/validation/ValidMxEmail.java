@@ -1,4 +1,4 @@
-package com.rohitPal.local._business_directory.validation;
+package com.rohitPal.localBusinessDirectory.validation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

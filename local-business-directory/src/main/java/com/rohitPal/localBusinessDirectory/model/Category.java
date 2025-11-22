@@ -1,18 +1,18 @@
-package com.rohitPal.local._business_directory.model;
+package com.rohitPal.localBusinessDirectory.model;
 
 public enum Category {
-    RESTAURANTS ,
-    HOSPITALS,
+    RESTAURANT ,
+    HOSPITAL,
     MEDICAL_STORE,
     FOOD_STALL,
-    SPORT_COMPLEX,
-    SPORT_SHOP,
+    SPORTS_COMPLEX,
+    SPORTS_SHOP,
     SHOE_STORE,
     PETROL_PUMP,
     ELECTRONIC_STORE,
     BIKE_SHOWROOM,
     CAR_SHOWROOM,
 
-    STATIONARY
+    STATIONERY
 
 }
