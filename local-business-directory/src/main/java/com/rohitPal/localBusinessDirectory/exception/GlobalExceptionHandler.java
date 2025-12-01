@@ -37,4 +37,41 @@ public class GlobalExceptionHandler {
                 HttpStatus.NOT_FOUND.value());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
+
+    @ExceptionHandler(UserAlreadyExists.class)
+    public ResponseEntity<ApiError> handleDuplicateUser(UserAlreadyExists e , HttpServletRequest req){
+        logger.warn("User already exists with this mobile number "  );
+        ApiError error = new ApiError(e.getMessage() , Instant.now().toString() ,
+                HttpStatus.CONFLICT.getReasonPhrase(), req.getRequestURI() ,
+                HttpStatus.CONFLICT.value());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
+    @ExceptionHandler(UserNotFound.class)
+    public ResponseEntity<ApiError> handleUserNotFoundException(UserNotFound e , HttpServletRequest req ){
+        logger.warn("conflict : {}" , e.getMessage());
+        ApiError error = new ApiError(e.getMessage() , Instant.now().toString() ,
+                HttpStatus.NOT_FOUND.getReasonPhrase(),  req.getRequestURI() , HttpStatus.NOT_FOUND.value());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public ResponseEntity<ApiError> handleEmailIntegrityException(EmailAlreadyExistsException e , HttpServletRequest req ){
+        logger.warn("conflict : {}" , e.getMessage());
+        ApiError error = new ApiError(e.getMessage() , Instant.now().toString() ,
+                HttpStatus.CONFLICT.getReasonPhrase(),  req.getRequestURI() , HttpStatus.CONFLICT.value());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ResponseEntity<ApiError> handleInvalidPassword(InvalidPasswordException e , HttpServletRequest req){
+        logger.warn("Invalid password");
+        ApiError error = new ApiError(e.getMessage() , Instant.now().toString() , HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                req.getRequestURI() , HttpStatus.BAD_REQUEST.value());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+
 }
