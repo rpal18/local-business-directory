@@ -3,10 +3,6 @@ package com.rohitPal.localBusinessDirectory.dto;
 import com.rohitPal.localBusinessDirectory.model.Category;
 import com.rohitPal.localBusinessDirectory.validation.ValidMxEmail;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
 /*
 in this BusinessDto class I have made use of @URL to validate whether the entered website is valid

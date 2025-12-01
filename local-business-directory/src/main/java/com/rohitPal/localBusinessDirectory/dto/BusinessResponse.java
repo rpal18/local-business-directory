@@ -16,12 +16,12 @@ public class BusinessResponse {
 
     private double longitude;
     private double latitude;
-    private double distanceInKm;
+    private double distance;
 
     public BusinessResponse() {
     }
 
-    public BusinessResponse(String businessName, String contactNumber, String email, String website, String address, Category category, double longitude , double latitude ,Long businessId , double distanceInKm) {
+    public BusinessResponse(String businessName, String contactNumber, String email, String website, String address, Category category, double longitude , double latitude ,Long businessId , double distance) {
         this.businessName = businessName;
         this.contactNumber = contactNumber;
         this.email = email;
@@ -31,7 +31,7 @@ public class BusinessResponse {
         this.latitude = latitude;
         this.businessId = businessId;
         this.longitude = longitude;
-        this.distanceInKm = distanceInKm;
+        this.distance = distance;
 
     }
 
@@ -107,11 +107,11 @@ public class BusinessResponse {
         this.businessId = businessId;
     }
 
-    public double getDistanceInKm() {
-        return distanceInKm;
+    public double getDistance() {
+        return distance;
     }
 
-    public void setDistanceInKm(double distanceInKm) {
-        this.distanceInKm = distanceInKm;
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 }
