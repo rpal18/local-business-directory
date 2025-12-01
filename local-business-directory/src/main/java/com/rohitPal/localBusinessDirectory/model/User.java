@@ -17,9 +17,9 @@ public class User {
     private String name;
 
     @NotBlank
-    @Column(name = "mobile_number"  , nullable = false)
+    @Column(name = "contact_number"  , nullable = false)
     @Pattern(regexp = "^(\\+91[\\-\\s]?)?[6-9]\\d{9}$" , message = "mobile number invalid!! Enter Valid Indian  mobile number :")
-    private String mobileNumber;
+    private String contactNumber;
     @NotBlank
     @Column(name ="address" , nullable = false)
     @Size(min = 5 , max = 50)
@@ -34,18 +34,23 @@ public class User {
     @NotNull
     @Column(name = "location", columnDefinition = "geography(Point , 4326)")
     private Point location;
+    @Column(name = "password" , nullable = false)
+    @NotBlank
+    @Size(min = 6 , max = 20)
+    private String password;
 
     public User() {
     }
 
-    public User(Long id, String name, String mobileNumber, String address, LocalDate dateOfBirth, String email, Point location) {
+    public User(Long id, String name, String contactNumber, String address, LocalDate dateOfBirth, String email, Point location , String password) {
         this.id = id;
         this.name = name;
-        this.mobileNumber = mobileNumber;
+        this.contactNumber = contactNumber;
         this.address = address;
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.location = location;
+        this.password = password;
     }
 
     public Long getId() {
@@ -64,12 +69,12 @@ public class User {
         this.name = name;
     }
 
-    public String getMobileNumber() {
-        return mobileNumber;
+    public String getContactNumber() {
+        return contactNumber;
     }
 
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
     }
 
     public String getAddress() {
@@ -102,5 +107,13 @@ public class User {
 
     public void setLocation(Point location) {
         this.location = location;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
