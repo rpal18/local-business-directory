@@ -1,9 +1,21 @@
 package com.rohitPal.localBusinessDirectory.repository.projection;
 
-import com.rohitPal.localBusinessDirectory.model.Business;
+import com.rohitPal.localBusinessDirectory.model.Category;
 
 public interface BusinessProjection {
-    Business getBusiness();
+    // 1. Business Data
+    Long getBusinessId();
+    String getBusinessName();
+    String getContactNumber();
+    String getEmail();
+    String getWebsite();
+    String getAddress();
+    Category getCategory();
 
-    double getDistance();
+    // We need lat/lon specifically to map to your DTO
+    Double getLatitude();
+    Double getLongitude();
+
+    // 2. The Calculated Distance
+    Double getDistance();
 }

@@ -8,8 +8,10 @@ import com.rohitPal.localBusinessDirectory.model.Business;
 import com.rohitPal.localBusinessDirectory.repository.BusinessRepository;
 import com.rohitPal.localBusinessDirectory.repository.projection.BusinessProjection;
 import jakarta.transaction.Transactional;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
-import org.modelmapper.ModelMapper;
+import org.locationtech.jts.geom.PrecisionModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,9 +24,12 @@ public class BusinessServiceImpl implements BusinessService{
     private final BusinessRepository businessRepository;
     private  OpenStreetMapGeocodingService openStreetMapGeocodingService;
 
+    private final GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel() , 4326);;
 
     @Autowired
-    private BusinessServiceImpl(BusinessRepository businessRepository , OpenStreetMapGeocodingService openStreetMapGeocodingService ){
+    public BusinessServiceImpl(BusinessRepository businessRepository ,
+                               OpenStreetMapGeocodingService openStreetMapGeocodingService
+                                ){
         this.businessRepository = businessRepository;
         this.openStreetMapGeocodingService = openStreetMapGeocodingService;
 
@@ -75,7 +80,7 @@ public class BusinessServiceImpl implements BusinessService{
         */
        Business savedBusiness = businessRepository.save(business);
 
-        return businessMapper(savedBusiness);
+       return businessMapper(savedBusiness);
     }
     /*
     -------------------------------------------------------------------------------
@@ -135,11 +140,18 @@ public class BusinessServiceImpl implements BusinessService{
         return businessMapper(business);
     }
 
+    @Override
+    public List<BusinessResponse> findKNearestBusinessesimpl(Double longitude, Double latitude, int k) {
+        List<BusinessProjection> KNN = businessRepository.findKNearestBusinesses(longitude , latitude , k);
+        return KNN.stream().map(this::businessProjectionMapper).toList();
+    }
+
 
     @Override
-    public List<BusinessResponse> getNearbyBusinessWithin(double longitude, double latitude, double radius) {
+    public List<BusinessResponse> getNearbyBusinessWithin(Double longitude, Double latitude, Double radius) {
+
      List<BusinessProjection> nearbyBusiness =  businessRepository.
-             findNearByBusiness(longitude , latitude , radius);
+             findNearByBusiness(longitude,latitude, radius);
      BusinessResponse response = new BusinessResponse();
         return nearbyBusiness.stream().
              map(this::businessProjectionMapper).
@@ -148,7 +160,6 @@ public class BusinessServiceImpl implements BusinessService{
     }
 
     private BusinessResponse businessMapper(Business business){
-
         if(business==null){
             return null;
         }
@@ -171,13 +182,19 @@ public class BusinessServiceImpl implements BusinessService{
         return response;
     }
 
-    private BusinessResponse businessProjectionMapper(BusinessProjection businessProjection){
-        Business business = businessProjection.getBusiness();
-        double distance = businessProjection.getDistance();
-
-        BusinessResponse businessResponse = businessMapper(business);
-        businessResponse.setDistanceInKm(distance);
-        return businessResponse;
+    private BusinessResponse businessProjectionMapper(BusinessProjection p){
+        return new BusinessResponse(
+                p.getBusinessName(),
+                p.getContactNumber(),
+                p.getEmail(),
+                p.getWebsite(),
+                p.getAddress(),
+                p.getCategory(),
+                p.getLongitude(),
+                p.getLatitude(),
+                p.getBusinessId(),
+                p.getDistance()
+        );
     }
 
 }

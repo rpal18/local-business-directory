@@ -2,6 +2,7 @@ package com.rohitPal.localBusinessDirectory.service;
 
 import com.rohitPal.localBusinessDirectory.dto.BusinessDto;
 import com.rohitPal.localBusinessDirectory.dto.BusinessResponse;
+import com.rohitPal.localBusinessDirectory.repository.projection.BusinessProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -20,6 +21,8 @@ public interface BusinessService {
     BusinessResponse getBusinessById(Long id);
 
 
-    List<BusinessResponse> getNearbyBusinessWithin(double longitude , double latitude , double radius);
+    List<BusinessResponse> findKNearestBusinessesimpl(Double longitude, Double latitude, int k);
+
+    List<BusinessResponse> getNearbyBusinessWithin(Double longitude , Double latitude , Double radius);
 
 }

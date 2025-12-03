@@ -71,7 +71,7 @@ public class OpenStreetMapGeocodingService implements GeocodingService {
 
              */
 
-            OsmResponse bestMatch = response.getFirst();
+            OsmResponse bestMatch = response.get(0);
 
             double latitude = Double.parseDouble(bestMatch.latitude());
             double longitude = Double.parseDouble(bestMatch.longitude());

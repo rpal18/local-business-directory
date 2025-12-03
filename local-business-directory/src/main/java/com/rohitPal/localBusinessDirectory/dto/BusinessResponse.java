@@ -14,14 +14,14 @@ public class BusinessResponse {
     private String address;
     private Category category;
 
-    private double longitude;
-    private double latitude;
-    private double distance;
+    private Double longitude;
+    private Double latitude;
+    private Double distance;
 
     public BusinessResponse() {
     }
 
-    public BusinessResponse(String businessName, String contactNumber, String email, String website, String address, Category category, double longitude , double latitude ,Long businessId , double distance) {
+    public BusinessResponse(String businessName, String contactNumber, String email, String website, String address, Category category, Double longitude , Double latitude ,Long businessId , Double distance) {
         this.businessName = businessName;
         this.contactNumber = contactNumber;
         this.email = email;
@@ -83,11 +83,11 @@ public class BusinessResponse {
         this.category = category;
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
@@ -95,7 +95,7 @@ public class BusinessResponse {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
@@ -107,11 +107,11 @@ public class BusinessResponse {
         this.businessId = businessId;
     }
 
-    public double getDistance() {
+    public Double getDistance() {
         return distance;
     }
 
-    public void setDistance(double distance) {
+    public void setDistance(Double distance) {
         this.distance = distance;
     }
 }

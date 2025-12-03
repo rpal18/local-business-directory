@@ -129,7 +129,7 @@ public class BusinessController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please provide either (lat & lon) OR userId");
         }
 
-        List<BusinessResponse> response = businessService.getKNearestBusiness(searchLon , searchLat , count);
+        List<BusinessResponse> response = businessService.findKNearestBusinessesimpl(searchLon , searchLat , count);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
